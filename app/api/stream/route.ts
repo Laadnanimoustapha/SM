@@ -48,7 +48,8 @@ export async function GET(req: Request) {
           wave: sim.wave,
           stats: sim.stats,
           roe: sim.roe,
-          wind: sim.currentWind
+          wind: sim.currentWind,
+          speedMultiplier: sim.speedMultiplier
         },
         threats: sim.threats.map(t => ({
           id: t.id, x: t.x, y: t.y, size: t.size, type: t.type,
@@ -62,8 +63,14 @@ export async function GET(req: Request) {
           }))
         })),
         explosions: sim.explosions.map(e => ({
-          x: e.x, y: e.y, size: e.size, maxRadius: e.maxRadius, 
-          life: e.life, maxLife: e.maxLife, color: e.color
+          x: e.x, y: e.y, size: e.size, maxRadius: e.maxRadius, radius: e.radius,
+          alpha: e.alpha, life: e.life, maxLife: e.maxLife, color: e.color, success: e.success,
+          particles: e.particles.map(p => ({ x: p.x, y: p.y, size: p.size, alpha: p.alpha, color: p.color })),
+          debris: (e.debris || []).map(d => ({ x: d.x, y: d.y, size: d.size, alpha: d.alpha, rotation: d.rotation }))
+        })),
+        chaffClouds: sim.chaffClouds.map(c => ({
+          alpha: c.alpha, 
+          particles: c.particles.map(p => ({ x: p.x, y: p.y, size: p.size, alpha: p.alpha }))
         })),
         events: sim.events
       };

@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { Simulation } from '@/lib/game/simulation';
 import { Renderer } from '@/lib/game/renderer';
 import type { WeaponData, SimulationState } from '@/types/game';
 
@@ -21,32 +20,25 @@ const WEAPON_SVG: Record<string, string> = {
 
 export default function Home() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const simRef = useRef<any>(null);
   const rendererRef = useRef<Renderer | null>(null);
 
   const [isRunning, setIsRunning] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [speedMultiplier, setSpeedMultiplier] = useState(1);
+  const [waveNumber, setWaveNumber] = useState(0);
+  const [activeDefenders, setActiveDefenders] = useState(17);
+  const [totalDefenders, setTotalDefenders] = useState(17);
   
-  // Stats state (throttled updates)
+  // Stats state
   const [stats, setStats] = useState<any>({
-    totalLaunched: 0,
-    totalIntercepted: 0,
-    totalGotThrough: 0,
-    defenseShotsFired: 0,
-    salvosFired: 0,
-    ecmJams: 0,
-    chaffDeployed: 0,
-    waveNumber: 0,
-    avgPk: 0,
-    totalWarheadKg: 0
+    totalLaunched: 0, totalIntercepted: 0, totalGotThrough: 0,
+    defenseShotsFired: 0, salvosFired: 0, ecmJams: 0, chaffDeployed: 0,
+    waveNumber: 0, avgPk: 0, totalWarheadKg: 0
   });
 
-  const [logs, setLogs] = useState<{ id: number, time: string, message: string, color: string, type: string }[]>([]);
+  const [logs, setLogs] = useState<any[]>([]);
   const [weapons, setWeapons] = useState<any>(null);
   const [activeTab, setActiveTab] = useState<'offensive' | 'defensive'>('offensive');
-
-  let logIdCounter = 0;
 
   // Fetch weapons database
   useEffect(() => {
@@ -54,14 +46,11 @@ export default function Home() {
       .then(res => res.json())
       .then(data => {
         setWeapons(data);
-        // Bind to global window for simulation.ts if strictly required, 
-        // though we refactored it to use local imports 
-        (window as any).WeaponsDB = data;
       })
       .catch(err => console.error("Failed to load Weapons DB:", err));
   }, []);
 
-  // Initialize Canvas and Game Engine
+  // Initialize Canvas and connect to SSE stream
   useEffect(() => {
     if (!canvasRef.current || !weapons) return;
     
@@ -79,115 +68,103 @@ export default function Home() {
       if (ctx) ctx.scale(dpr, dpr);
     }
 
-    const sim: any = new Simulation();
-    (sim as any).canvasWidth = 900;
-    (sim as any).canvasHeight = 650;
-    sim.reset();
-    
-    // Wire up events to React state
-    sim.onEvent = (evt: any) => {
-      setLogs(prev => {
-        const newLogs = [{ id: logIdCounter++, ...evt }, ...prev];
-        return newLogs.slice(0, 50); // Keep last 50
-      });
-    };
-    
-    sim.onStatsUpdate = (newStats: any) => {
-      setStats({ ...newStats });
-    };
-
-    simRef.current = sim;
     rendererRef.current = new Renderer(canvas);
 
-    let lastTime = 0;
-    let animationId: number;
+    console.log("Connecting to physics engine SSE backend...");
+    const eventSource = new EventSource('/api/stream');
 
-    const gameLoop = (timestamp: number) => {
-      const dt = Math.min((timestamp - lastTime) / 1000, 0.05);
-      lastTime = timestamp;
+    eventSource.onmessage = (event) => {
+      try {
+        const data = JSON.parse(event.data);
+        const simState = {
+          ...data.meta,
+          threats: data.threats,
+          defenders: data.defenders,
+          explosions: data.explosions,
+          chaffClouds: data.chaffClouds,
+          events: data.events
+        };
 
-      sim.update(dt);
-      rendererRef.current?.render(sim);
+        // Render directly from the SSE event payload
+        rendererRef.current?.render(simState);
 
-      animationId = requestAnimationFrame(gameLoop);
+        // Update UI state
+        setIsRunning(simState.running);
+        if (!simState.running && simState.wave > 0) setIsPaused(true);
+        else setIsPaused(false);
+        setSpeedMultiplier(simState.speedMultiplier);
+        setWaveNumber(simState.wave);
+        setStats(simState.stats);
+        
+        setActiveDefenders(simState.defenders.filter((d: any) => d.color !== '#555').length); // Or any alive check
+        setTotalDefenders(simState.defenders.length);
+
+        if (simState.events?.length > 0) {
+          // just taking the first 50
+          setLogs(simState.events.slice(0, 50));
+        }
+
+      } catch (err) {
+        console.error("Error parsing stream payload:", err);
+      }
     };
 
-    animationId = requestAnimationFrame((timestamp) => {
-      lastTime = timestamp;
-      gameLoop(timestamp);
-    });
+    eventSource.onerror = (err) => {
+      console.error("EventSource failed:", err);
+      eventSource.close();
+    };
 
     return () => {
-      cancelAnimationFrame(animationId);
+      eventSource.close();
     };
   }, [weapons]);
+
+  const sendCommand = (action: string, payload?: any) => {
+    fetch('/api/command', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action, payload })
+    }).catch(console.error);
+  };
 
   // Keybindings
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      const sim = simRef.current;
-      if (!sim) return;
-
       switch (e.key.toLowerCase()) {
         case ' ':
           e.preventDefault();
-          sim.toggle();
-          setIsRunning(sim.running);
-          setIsPaused(!sim.running && sim.wave > 0);
+          if (isRunning) sendCommand('PAUSE');
+          else sendCommand('START');
           break;
         case 'r':
-          sim.reset();
+          sendCommand('RESET');
           setLogs([]);
-          setIsRunning(false);
-          setIsPaused(false);
-          setStats(sim.stats);
           break;
         case 'w':
-          if (sim.running) sim.launchWave();
+          if (isRunning) sendCommand('WAVE');
           break;
-        case '1': sim.speedMultiplier = 1; setSpeedMultiplier(1); break;
-        case '2': sim.speedMultiplier = 2; setSpeedMultiplier(2); break;
-        case '3': sim.speedMultiplier = 4; setSpeedMultiplier(4); break;
+        case '1': sendCommand('SPEED', { amount: 1 }); break;
+        case '2': sendCommand('SPEED', { amount: 2 }); break;
+        case '3': sendCommand('SPEED', { amount: 4 }); break;
       }
     };
     
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [isRunning]);
 
-  const handleStart = () => {
-    simRef.current?.start();
-    setIsRunning(true);
-    setIsPaused(false);
-  };
-
-  const handlePause = () => {
-    simRef.current?.pause();
-    setIsRunning(false);
-    setIsPaused(true);
-  };
-
+  const handleStart = () => sendCommand('START');
+  const handlePause = () => sendCommand('PAUSE');
   const handleReset = () => {
-    simRef.current?.reset();
+    sendCommand('RESET');
     setLogs([]);
-    setIsRunning(false);
-    setIsPaused(false);
-    if (simRef.current) setStats(simRef.current.stats);
   };
-
-  const handleWave = () => {
-    if (simRef.current?.running) simRef.current.launchWave();
-  };
-
+  const handleWave = () => setWaveNumber(prev => { sendCommand('WAVE'); return prev; });
   const handleSpeedChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = parseFloat(e.target.value);
-    setSpeedMultiplier(val);
-    if (simRef.current) simRef.current.speedMultiplier = val;
+    sendCommand('SPEED', { amount: val });
   };
 
-  const activeDefenders = simRef.current ? simRef.current.defenders.filter((d: any) => d.alive).length : 0;
-  const totalDefenders = simRef.current ? simRef.current.defenders.length : 0;
-  
   const successRate = stats.totalLaunched > 0 ? ((stats.totalIntercepted / stats.totalLaunched) * 100).toFixed(1) : '0.0';
 
   if (!weapons) {
@@ -209,7 +186,7 @@ export default function Home() {
           <span className="header-subtitle">Integrated Air Defense Simulator</span>
         </div>
         <div className="header-meta">
-          <div className="header-badge">OPEN-SOURCE DATA • SIMULATION</div>
+          <div className="header-badge">OPEN-SOURCE DATA • SERVER SIMULATION</div>
           <div className={`header-status ${isRunning ? 'active' : ''}`}>
             {isRunning ? 'ACTIVE' : isPaused ? 'PAUSED' : 'STANDBY'}
           </div>
@@ -227,7 +204,7 @@ export default function Home() {
               <button 
                 onClick={handleStart} 
                 disabled={isRunning} 
-                className={`ctrl-btn ctrl-start ${!isRunning && stats.waveNumber === 0 ? 'active' : ''}`} 
+                className={`ctrl-btn ctrl-start ${!isRunning && waveNumber === 0 ? 'active' : ''}`} 
                 title="Start (Space)"
               >
                 <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
@@ -290,7 +267,7 @@ export default function Home() {
             <div className="stats-grid">
               <div className="stat-card">
                 <div className="stat-label">Wave</div>
-                <div className="stat-value">{stats.waveNumber}</div>
+                <div className="stat-value">{waveNumber}</div>
               </div>
               <div className="stat-card">
                 <div className="stat-label">Threats</div>
@@ -345,7 +322,7 @@ export default function Home() {
 
           <div className="panel weapons-panel">
             <h2 className="panel-title panel-title-collapsible">
-              <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
               Weapons Database
             </h2>
             <div className="weapons-content">
