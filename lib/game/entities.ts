@@ -1,3 +1,6 @@
+import { WeaponsDB } from './weapons_data';
+import type { EntityConfig, WeaponData } from '@/types/game';
+
 // ============================================
 // ENTITIES — Physics-Based Offensive & Defensive Units
 // Uses WeaponsDB for real-world specifications
@@ -5,7 +8,7 @@
 
 // ── Base Classes ──────────────────────────────
 
-class Entity {
+export class Entity {
   constructor(config) {
     this.id = Entity._nextId++;
     this.name = config.name || 'Unknown';
@@ -29,7 +32,7 @@ Entity._nextId = 1;
 
 // ── Offensive Entities ────────────────────────
 
-class OffensiveEntity extends Entity {
+export class OffensiveEntity extends Entity {
   constructor(config) {
     super(config);
     this.category = 'offensive';
@@ -174,10 +177,10 @@ class OffensiveEntity extends Entity {
 
 // ── Ballistic Missiles (physics-based arc) ──
 
-class BallisticMissile extends OffensiveEntity {
+export class BallisticMissile extends OffensiveEntity {
   constructor(x, y, targetX, targetY, tier) {
     // Use WeaponsDB for real specs
-    const db = window.WeaponsDB;
+    const db = WeaponsDB;
     const tierMap = {
       short: db ? db.offensive.shahab1 : null,
       medium: db ? db.offensive.shahab3 : null,
@@ -275,7 +278,7 @@ class BallisticMissile extends OffensiveEntity {
     this.beta = t.massKg / (t.dragCoeff * t.crossSection);
 
     // CEP-based target offset (Gaussian)
-    if (window.WeaponsDB) {
+    if (WeaponsDB) {
       const offset = WeaponsDB.physics.randomCEPOffset(t.cepM);
       // Scale CEP to pixel space (1 pixel ≈ 1km at this zoom)
       const cepScale = 0.015;
@@ -339,7 +342,7 @@ class BallisticMissile extends OffensiveEntity {
     this.y = linearY + arcOffset;
 
     // ── NEW: Coriolis deflection (shifts impact point eastward) ──
-    if (window.WeaponsDB && this.speedMach > 2) {
+    if (WeaponsDB && this.speedMach > 2) {
       const coriolisShift = WeaponsDB.physics.coriolisDeflection(
         this.speedMach * 343, this.phaseTimer
       );
@@ -347,14 +350,14 @@ class BallisticMissile extends OffensiveEntity {
     }
 
     // ── NEW: Wind effect during midcourse ──
-    if (window.WeaponsDB && this.flightPhase === 'midcourse') {
+    if (WeaponsDB && this.flightPhase === 'midcourse') {
       const wind = WeaponsDB.physics.windAtAltitude(this.currentAltitudeKm || 10);
       this.x += wind.wx * dt;
       this.y += wind.wy * dt;
     }
 
     // ── NEW: Thermal signature from aerodynamic heating ──
-    if (window.WeaponsDB) {
+    if (WeaponsDB) {
       this.thermalSig = WeaponsDB.physics.thermalSignature(
         this.currentMach || this.speedMach, this.currentAltitudeKm || 0
       );
@@ -396,9 +399,9 @@ class BallisticMissile extends OffensiveEntity {
 
 // ── Cruise Missile (terrain-hugging, evasive) ──
 
-class CruiseMissile extends OffensiveEntity {
+export class CruiseMissile extends OffensiveEntity {
   constructor(x, y, targetX, targetY) {
-    const db = window.WeaponsDB;
+    const db = WeaponsDB;
     const we = db ? db.offensive.soumar : null;
     const sp = we ? we.simParams : {};
     const specs = we ? we.specs : {};
@@ -510,9 +513,9 @@ class CruiseMissile extends OffensiveEntity {
 
 // ── Recon Drone ──
 
-class ReconDrone extends OffensiveEntity {
+export class ReconDrone extends OffensiveEntity {
   constructor(x, y, targetX, targetY) {
-    const db = window.WeaponsDB;
+    const db = WeaponsDB;
     const we = db ? db.offensive.mohajer6 : null;
     const sp = we ? we.simParams : {};
     const specs = we ? we.specs : {};
@@ -574,9 +577,9 @@ class ReconDrone extends OffensiveEntity {
 
 // ── Kamikaze Drone ──
 
-class KamikazeDrone extends OffensiveEntity {
+export class KamikazeDrone extends OffensiveEntity {
   constructor(x, y, targetX, targetY) {
-    const db = window.WeaponsDB;
+    const db = WeaponsDB;
     const we = db ? db.offensive.shahed136 : null;
     const sp = we ? we.simParams : {};
     const specs = we ? we.specs : {};
@@ -652,7 +655,7 @@ class KamikazeDrone extends OffensiveEntity {
 
 // ── Defensive Entities ────────────────────────
 
-class DefensiveEntity extends Entity {
+export class DefensiveEntity extends Entity {
   constructor(config) {
     super(config);
     this.category = 'defensive';
@@ -874,9 +877,9 @@ class DefensiveEntity extends Entity {
   }
 }
 
-class ShortRangeInterceptor extends DefensiveEntity {
+export class ShortRangeInterceptor extends DefensiveEntity {
   constructor(x, y) {
-    const db = window.WeaponsDB;
+    const db = WeaponsDB;
     const we = db ? db.defensive.torM1 : null;
     const sp = we ? we.simParams : {};
     super({
@@ -898,9 +901,9 @@ class ShortRangeInterceptor extends DefensiveEntity {
   }
 }
 
-class MidRangeInterceptor extends DefensiveEntity {
+export class MidRangeInterceptor extends DefensiveEntity {
   constructor(x, y) {
-    const db = window.WeaponsDB;
+    const db = WeaponsDB;
     const we = db ? db.defensive.bavar373 : null;
     const sp = we ? we.simParams : {};
     super({
@@ -922,9 +925,9 @@ class MidRangeInterceptor extends DefensiveEntity {
   }
 }
 
-class LongRangeInterceptor extends DefensiveEntity {
+export class LongRangeInterceptor extends DefensiveEntity {
   constructor(x, y) {
-    const db = window.WeaponsDB;
+    const db = WeaponsDB;
     const we = db ? db.defensive.s300pmu2 : null;
     const sp = we ? we.simParams : {};
     super({
@@ -946,9 +949,9 @@ class LongRangeInterceptor extends DefensiveEntity {
   }
 }
 
-class RapidDefenseSystem extends DefensiveEntity {
+export class RapidDefenseSystem extends DefensiveEntity {
   constructor(x, y) {
-    const db = window.WeaponsDB;
+    const db = WeaponsDB;
     const we = db ? db.defensive.phalanxCIWS : null;
     const sp = we ? we.simParams : {};
     super({
@@ -970,9 +973,9 @@ class RapidDefenseSystem extends DefensiveEntity {
   }
 }
 
-class FighterJetSquadron extends DefensiveEntity {
+export class FighterJetSquadron extends DefensiveEntity {
   constructor(x, y) {
-    const db = window.WeaponsDB;
+    const db = WeaponsDB;
     const we = db ? db.defensive.f14am : null;
     const sp = we ? we.simParams : {};
     super({
@@ -997,9 +1000,9 @@ class FighterJetSquadron extends DefensiveEntity {
 
 // ── NEW: Khordad-15 (Stealth-hunter MR-SAM) ──
 
-class KhordadSystem extends DefensiveEntity {
+export class KhordadSystem extends DefensiveEntity {
   constructor(x, y) {
-    const db = window.WeaponsDB;
+    const db = WeaponsDB;
     const we = db ? db.defensive.khordad15 : null;
     const sp = we ? we.simParams : {};
     super({
@@ -1035,9 +1038,9 @@ class KhordadSystem extends DefensiveEntity {
 
 // ── NEW: Pantsir-S1 (SHORAD — Gun + Missile combo) ──
 
-class PantsirSystem extends DefensiveEntity {
+export class PantsirSystem extends DefensiveEntity {
   constructor(x, y) {
-    const db = window.WeaponsDB;
+    const db = WeaponsDB;
     const we = db ? db.defensive.pantsirS1 : null;
     const sp = we ? we.simParams : {};
     super({
@@ -1063,9 +1066,9 @@ class PantsirSystem extends DefensiveEntity {
 
 // ── NEW: Iron Dome (C-RAM, smart threat filtering) ──
 
-class IronDomeSystem extends DefensiveEntity {
+export class IronDomeSystem extends DefensiveEntity {
   constructor(x, y) {
-    const db = window.WeaponsDB;
+    const db = WeaponsDB;
     const we = db ? db.defensive.ironDome : null;
     const sp = we ? we.simParams : {};
     super({
@@ -1090,9 +1093,9 @@ class IronDomeSystem extends DefensiveEntity {
 
 // ── NEW: THAAD (Exo-atmospheric ABM — terminal phase only) ──
 
-class THAADSystem extends DefensiveEntity {
+export class THAADSystem extends DefensiveEntity {
   constructor(x, y) {
-    const db = window.WeaponsDB;
+    const db = WeaponsDB;
     const we = db ? db.defensive.thaad : null;
     const sp = we ? we.simParams : {};
     super({
@@ -1118,9 +1121,9 @@ class THAADSystem extends DefensiveEntity {
 
 // ── NEW: EW Jammer Station (Electronic Warfare — non-kinetic) ──
 
-class EWJammerStation extends DefensiveEntity {
+export class EWJammerStation extends DefensiveEntity {
   constructor(x, y) {
-    const db = window.WeaponsDB;
+    const db = WeaponsDB;
     const we = db ? db.defensive.ewJammer : null;
     const sp = we ? we.simParams : {};
     super({
@@ -1170,9 +1173,9 @@ class EWJammerStation extends DefensiveEntity {
 
 // ── NEW Offensive: Sejjil-2 (Solid-fuel MRBM — faster boost) ──
 
-class SolidBallisticMissile extends OffensiveEntity {
+export class SolidBallisticMissile extends OffensiveEntity {
   constructor(x, y, targetX, targetY) {
-    const db = window.WeaponsDB;
+    const db = WeaponsDB;
     const we = db ? db.offensive.sejjil2 : null;
     const sp = we ? we.simParams : {};
     const specs = we ? we.specs : {};
@@ -1196,7 +1199,7 @@ class SolidBallisticMissile extends OffensiveEntity {
     this.beta = (specs.launchMassKg || 23600) / ((specs.Cd || 0.28) * (specs.crossSectionM2 || 1.227));
     this.thermalSig = 0;
 
-    if (window.WeaponsDB) {
+    if (WeaponsDB) {
       const offset = WeaponsDB.physics.randomCEPOffset(specs.cepM || 250);
       this.targetX += offset.dx * 0.015;
       this.targetY += offset.dy * 0.015;
@@ -1235,14 +1238,14 @@ class SolidBallisticMissile extends OffensiveEntity {
     this.y = this.startY + (this.targetY - this.startY) * t_p + (-this.arcHeight * 4 * t_p * (1 - t_p));
 
     // Coriolis + wind
-    if (window.WeaponsDB && this.speedMach > 2) {
+    if (WeaponsDB && this.speedMach > 2) {
       this.x += WeaponsDB.physics.coriolisDeflection(this.speedMach * 343, this.phaseTimer);
     }
-    if (window.WeaponsDB && this.flightPhase === 'midcourse') {
+    if (WeaponsDB && this.flightPhase === 'midcourse') {
       const wind = WeaponsDB.physics.windAtAltitude(12);
       this.x += wind.wx * dt;
     }
-    if (window.WeaponsDB) {
+    if (WeaponsDB) {
       this.thermalSig = WeaponsDB.physics.thermalSignature(this.currentMach || this.speedMach, this.currentAltitudeKm || 0);
     }
 
@@ -1267,9 +1270,9 @@ class SolidBallisticMissile extends OffensiveEntity {
 
 // ── NEW Offensive: Fattah-1 (Hypersonic Glide Vehicle) ──
 
-class HypersonicGlideVehicle extends OffensiveEntity {
+export class HypersonicGlideVehicle extends OffensiveEntity {
   constructor(x, y, targetX, targetY) {
-    const db = window.WeaponsDB;
+    const db = WeaponsDB;
     const we = db ? db.offensive.fattah1 : null;
     const sp = we ? we.simParams : {};
     const specs = we ? we.specs : {};
@@ -1295,7 +1298,7 @@ class HypersonicGlideVehicle extends OffensiveEntity {
     this.skipPhase = 0;
     this.thermalSig = 0;
 
-    if (window.WeaponsDB) {
+    if (WeaponsDB) {
       const offset = WeaponsDB.physics.randomCEPOffset(specs.cepM || 30);
       this.targetX += offset.dx * 0.015;
       this.targetY += offset.dy * 0.015;
@@ -1350,7 +1353,7 @@ class HypersonicGlideVehicle extends OffensiveEntity {
     this.y = linearY + arcOffset + skipBounce;
 
     // Coriolis
-    if (window.WeaponsDB) {
+    if (WeaponsDB) {
       this.x += WeaponsDB.physics.coriolisDeflection(this.speedMach * 343, this.phaseTimer);
       this.thermalSig = WeaponsDB.physics.thermalSignature(this.currentMach || 15, this.currentAltitudeKm || 0);
     }
@@ -1387,9 +1390,9 @@ class HypersonicGlideVehicle extends OffensiveEntity {
 
 // ── NEW Offensive: Paveh ALCM (Air-Launched Cruise Missile — sea-skimming) ──
 
-class AirLaunchedCruise extends OffensiveEntity {
+export class AirLaunchedCruise extends OffensiveEntity {
   constructor(x, y, targetX, targetY) {
-    const db = window.WeaponsDB;
+    const db = WeaponsDB;
     const we = db ? db.offensive.paveh : null;
     const sp = we ? we.simParams : {};
     const specs = we ? we.specs : {};
@@ -1459,7 +1462,7 @@ class AirLaunchedCruise extends OffensiveEntity {
     this.y += moveY;
 
     // Wind effect on cruise missiles
-    if (window.WeaponsDB) {
+    if (WeaponsDB) {
       const wind = WeaponsDB.physics.windAtAltitude(0.03);
       this.x += wind.wx * dt * 0.5;
       this.y += wind.wy * dt * 0.5;
@@ -1493,9 +1496,9 @@ class AirLaunchedCruise extends OffensiveEntity {
 
 // ── NEW Offensive: Arash-2 (Heavy Attack Drone — jet-powered OWA) ──
 
-class HeavyAttackDrone extends OffensiveEntity {
+export class HeavyAttackDrone extends OffensiveEntity {
   constructor(x, y, targetX, targetY) {
-    const db = window.WeaponsDB;
+    const db = WeaponsDB;
     const we = db ? db.offensive.arash2 : null;
     const sp = we ? we.simParams : {};
     const specs = we ? we.specs : {};
@@ -1537,7 +1540,7 @@ class HeavyAttackDrone extends OffensiveEntity {
 
     // Wind effect
     let windDx = 0, windDy = 0;
-    if (window.WeaponsDB) {
+    if (WeaponsDB) {
       const wind = WeaponsDB.physics.windAtAltitude(0.5);
       windDx = wind.wx * dt;
       windDy = wind.wy * dt;
@@ -1571,7 +1574,7 @@ class HeavyAttackDrone extends OffensiveEntity {
 
 // ── Explosions & Effects ──────────────────────
 
-class Explosion {
+export class Explosion {
   constructor(x, y, success, size) {
     this.x = x;
     this.y = y;
@@ -1649,7 +1652,7 @@ class Explosion {
 
 // ── Chaff Cloud Effect ──
 
-class ChaffCloud {
+export class ChaffCloud {
   constructor(x, y) {
     this.x = x;
     this.y = y;

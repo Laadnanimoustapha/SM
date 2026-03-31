@@ -1,8 +1,11 @@
+import type { Entity, OffensiveEntity, DefensiveEntity } from './entities';
+import { WeaponsDB } from './weapons_data';
+
 // ============================================
 // RENDERER — Military HUD & NATO Symbology
 // ============================================
 
-class Renderer {
+export class Renderer {
   constructor(canvas) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');

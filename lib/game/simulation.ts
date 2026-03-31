@@ -1,10 +1,13 @@
+import { Entity, OffensiveEntity, DefensiveEntity, ReconDrone, KamikazeDrone } from './entities';
+import { WeaponsDB } from './weapons_data';
+
 // ============================================
 // SIMULATION ENGINE — Kill Chain & Fire Control
 // Advanced Physics: Coriolis, Wind, Thermal IR,
 // Radar Horizon, Doppler, Blast Radius, EW
 // ============================================
 
-class Simulation {
+export class Simulation {
   constructor() {
     this.threats = [];
     this.defenders = [];
@@ -292,7 +295,7 @@ class Simulation {
         if (!defender.alive || defender.isEW) continue;
         if (defender.canDetect(threat)) {
           // ── Radar horizon check (NEW) ──
-          if (window.WeaponsDB) {
+          if (WeaponsDB) {
             const dx = defender.x - threat.x;
             const dy = defender.y - threat.y;
             const distKm = Math.sqrt(dx * dx + dy * dy) * 0.5; // approximate pixel-to-km
@@ -401,7 +404,7 @@ class Simulation {
       if (!result) continue;
 
       // ── Apply multipath clutter factor (NEW) ──
-      if (window.WeaponsDB && target.altitude !== undefined) {
+      if (WeaponsDB && target.altitude !== undefined) {
         const clutterFactor = WeaponsDB.physics.multipathClutterFactor(
           target.currentAltitudeKm || (target.altitude * 30)
         );
@@ -474,7 +477,7 @@ class Simulation {
 
           // ── Blast radius calculation (NEW) ──
           let blastStr = '';
-          if (window.WeaponsDB && threat.warheadKg > 0) {
+          if (WeaponsDB && threat.warheadKg > 0) {
             const blastR = WeaponsDB.physics.blastRadiusM(threat.warheadKg);
             blastStr = ` | Blast: ${blastR.toFixed(0)}m`;
             this.stats.blastDamageTotal += threat.warheadKg;
@@ -507,7 +510,7 @@ class Simulation {
     this.time += scaledDt;
 
     // Update wind state for HUD
-    if (window.WeaponsDB) {
+    if (WeaponsDB) {
       this.currentWind = WeaponsDB.physics.windAtAltitude(5);
     }
 
