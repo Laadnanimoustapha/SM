@@ -1686,16 +1686,18 @@ export class ChaffCloud {
   }
 }
 
+export const Entities = {
+  BallisticMissile, CruiseMissile,
+  ReconDrone, KamikazeDrone,
+  SolidBallisticMissile, HypersonicGlideVehicle,
+  AirLaunchedCruise, HeavyAttackDrone,
+  ShortRangeInterceptor, MidRangeInterceptor, LongRangeInterceptor,
+  RapidDefenseSystem, FighterJetSquadron,
+  KhordadSystem, PantsirSystem, IronDomeSystem,
+  THAADSystem, EWJammerStation,
+  Explosion, ChaffCloud
+};
+
 if (typeof window !== 'undefined') {
-  window.Entities = {
-    BallisticMissile, CruiseMissile,
-    ReconDrone, KamikazeDrone,
-    SolidBallisticMissile, HypersonicGlideVehicle,
-    AirLaunchedCruise, HeavyAttackDrone,
-    ShortRangeInterceptor, MidRangeInterceptor, LongRangeInterceptor,
-    RapidDefenseSystem, FighterJetSquadron,
-    KhordadSystem, PantsirSystem, IronDomeSystem,
-    THAADSystem, EWJammerStation,
-    Explosion, ChaffCloud
-  };
+  (window as any).Entities = Entities;
 }

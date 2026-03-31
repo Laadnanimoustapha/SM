@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { Entity, OffensiveEntity, DefensiveEntity, ReconDrone, KamikazeDrone } from './entities';
+import { Entities } from './entities';
 import { WeaponsDB } from './weapons_data';
 
 // ============================================
