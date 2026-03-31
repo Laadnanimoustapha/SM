@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { SimulationEngine } from '@/lib/game/simulation';
+import { Simulation } from '@/lib/game/simulation';
 import { Renderer } from '@/lib/game/renderer';
 import type { WeaponData, SimulationState } from '@/types/game';
 
 export default function Home() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const simRef = useRef<SimulationEngine | null>(null);
+  const simRef = useRef<Simulation | null>(null);
   const rendererRef = useRef<Renderer | null>(null);
 
   const [isRunning, setIsRunning] = useState(false);
@@ -65,7 +65,7 @@ export default function Home() {
       if (ctx) ctx.scale(dpr, dpr);
     }
 
-    const sim = new SimulationEngine();
+    const sim = new Simulation();
     sim.canvasWidth = 900;
     sim.canvasHeight = 650;
     sim.reset();
