@@ -196,7 +196,7 @@ export default function Home() {
         </div>
         <div className="header-meta">
           <div className="header-badge">OPEN-SOURCE DATA • SIMULATION</div>
-          <div className={\`header-status \${isRunning ? 'active' : ''}\`}>
+          <div className={`header-status ${isRunning ? 'active' : ''}`}>
             {isRunning ? 'ACTIVE' : isPaused ? 'PAUSED' : 'STANDBY'}
           </div>
         </div>
@@ -213,7 +213,7 @@ export default function Home() {
               <button 
                 onClick={handleStart} 
                 disabled={isRunning} 
-                className={\`ctrl-btn ctrl-start \${!isRunning && stats.waveNumber === 0 ? 'active' : ''}\`} 
+                className={`ctrl-btn ctrl-start ${!isRunning && stats.waveNumber === 0 ? 'active' : ''}`} 
                 title="Start (Space)"
               >
                 <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
@@ -222,7 +222,7 @@ export default function Home() {
               <button 
                 onClick={handlePause} 
                 disabled={!isRunning} 
-                className={\`ctrl-btn ctrl-pause \${isRunning ? 'active' : ''}\`} 
+                className={`ctrl-btn ctrl-pause ${isRunning ? 'active' : ''}`} 
                 title="Pause (Space)"
               >
                 <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
@@ -285,12 +285,12 @@ export default function Home() {
               <div className="stat-card stat-card-success">
                 <div className="stat-label">Kills</div>
                 <div className="stat-value">{stats.totalIntercepted}</div>
-                <div className="stat-bar"><div className="stat-bar-fill bar-green" style={{ width: \`\${stats.totalLaunched ? (stats.totalIntercepted / stats.totalLaunched)*100 : 0}%\` }}></div></div>
+                <div className="stat-bar"><div className="stat-bar-fill bar-green" style={{ width: `${stats.totalLaunched ? (stats.totalIntercepted / stats.totalLaunched)*100 : 0}%` }}></div></div>
               </div>
               <div className="stat-card stat-card-danger">
                 <div className="stat-label">Leakers</div>
                 <div className="stat-value">{stats.totalGotThrough}</div>
-                <div className="stat-bar"><div className="stat-bar-fill bar-red" style={{ width: \`\${stats.totalLaunched ? (stats.totalGotThrough / stats.totalLaunched)*100 : 0}%\` }}></div></div>
+                <div className="stat-bar"><div className="stat-bar-fill bar-red" style={{ width: `${stats.totalLaunched ? (stats.totalGotThrough / stats.totalLaunched)*100 : 0}%` }}></div></div>
               </div>
               <div className="stat-card stat-card-highlight">
                 <div className="stat-label">Kill Rate (Pk)</div>
@@ -336,8 +336,8 @@ export default function Home() {
             </h2>
             <div className="weapons-content">
               <div className="weapons-tabs">
-                <button className={\`weapons-tab \${activeTab === 'offensive' ? 'active' : ''}\`} onClick={() => setActiveTab('offensive')}>OFFENSIVE</button>
-                <button className={\`weapons-tab \${activeTab === 'defensive' ? 'active' : ''}\`} onClick={() => setActiveTab('defensive')}>DEFENSIVE</button>
+                <button className={`weapons-tab ${activeTab === 'offensive' ? 'active' : ''}`} onClick={() => setActiveTab('offensive')}>OFFENSIVE</button>
+                <button className={`weapons-tab ${activeTab === 'defensive' ? 'active' : ''}`} onClick={() => setActiveTab('defensive')}>DEFENSIVE</button>
               </div>
               <div className="weapons-list">
                 {Object.keys(weapons[activeTab] || {}).map(key => {
@@ -372,7 +372,7 @@ export default function Home() {
             </h2>
             <div className="event-log">
               {logs.map(log => (
-                <div key={log.id} className={\`log-entry visible log-\${log.type}\`}>
+                <div key={log.id} className={`log-entry visible log-${log.type}`}>
                   <span className="log-time">[T+{log.time}]</span>
                   <span className="log-msg" style={{color: log.color}}>{log.message}</span>
                 </div>
