@@ -4,7 +4,7 @@
 //          Wikipedia (verified), OSINT databases
 // ============================================
 
-const WeaponsDB = {
+export const WeaponsDB = {
 
   // ── Physics Constants ──────────────────────────
   physics: {
