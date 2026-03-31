@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 400" width="120" height="400">
+  <!-- Shahab-1 (Scud-B variant) — Short Range Ballistic Missile -->
+  <defs>
+    <linearGradient id="bodyGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4a5568"/>
+      <stop offset="30%" stop-color="#718096"/>
+      <stop offset="70%" stop-color="#718096"/>
+      <stop offset="100%" stop-color="#4a5568"/>
+    </linearGradient>
+    <linearGradient id="noseGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e53e3e"/>
+      <stop offset="50%" stop-color="#fc8181"/>
+      <stop offset="100%" stop-color="#e53e3e"/>
+    </linearGradient>
+    <radialGradient id="flameGrad" cx="50%" cy="0%" r="80%">
+      <stop offset="0%" stop-color="#fff7ed"/>
+      <stop offset="30%" stop-color="#fbbf24"/>
+      <stop offset="60%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#dc2626" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Exhaust flame -->
+  <ellipse cx="60" cy="385" rx="14" ry="25" fill="url(#flameGrad)" opacity="0.9"/>
+  <ellipse cx="60" cy="380" rx="8" ry="15" fill="#fef3c7" opacity="0.8"/>
+  <!-- Fins (4 stabilizers) -->
+  <polygon points="38,340 22,370 38,365" fill="#2d3748" stroke="#4a5568" stroke-width="0.5"/>
+  <polygon points="82,340 98,370 82,365" fill="#2d3748" stroke="#4a5568" stroke-width="0.5"/>
+  <polygon points="55,340 55,372 60,365" fill="#2d3748" stroke="#4a5568" stroke-width="0.5"/>
+  <polygon points="65,340 65,372 60,365" fill="#2d3748" stroke="#4a5568" stroke-width="0.5"/>
+  <!-- Main body -->
+  <rect x="42" y="80" width="36" height="280" rx="3" fill="url(#bodyGrad)"/>
+  <!-- Body panel lines -->
+  <line x1="42" y1="140" x2="78" y2="140" stroke="#2d3748" stroke-width="0.5" opacity="0.5"/>
+  <line x1="42" y1="200" x2="78" y2="200" stroke="#2d3748" stroke-width="0.5" opacity="0.5"/>
+  <line x1="42" y1="260" x2="78" y2="260" stroke="#2d3748" stroke-width="0.5" opacity="0.5"/>
+  <!-- Warhead section -->
+  <rect x="42" y="60" width="36" height="25" rx="2" fill="#c53030"/>
+  <!-- Nosecone -->
+  <path d="M60 10 Q42 50 42 60 L78 60 Q78 50 60 10Z" fill="url(#noseGrad)"/>
+  <!-- Markings -->
+  <text x="60" y="180" text-anchor="middle" font-family="monospace" font-size="7" fill="#a0aec0" opacity="0.6">شهاب-۱</text>
+  <text x="60" y="220" text-anchor="middle" font-family="monospace" font-size="5" fill="#a0aec0" opacity="0.4">SRBM</text>
+</svg>

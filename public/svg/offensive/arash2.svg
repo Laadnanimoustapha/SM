@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 110" width="260" height="110">
+  <!-- Arash-2 — Heavy Attack Drone (Jet-Powered OWA) -->
+  <defs>
+    <linearGradient id="bodyGradA2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#78350f"/>
+      <stop offset="50%" stop-color="#a16207"/>
+      <stop offset="100%" stop-color="#78350f"/>
+    </linearGradient>
+    <radialGradient id="jetGradA2" cx="100%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#fef3c7"/>
+      <stop offset="40%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#78350f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Jet exhaust -->
+  <ellipse cx="15" cy="55" rx="18" ry="8" fill="url(#jetGradA2)" opacity="0.8"/>
+  <!-- Delta wing body -->
+  <polygon points="230,55 100,10 35,40 25,50 25,60 35,70 100,100 230,55" fill="url(#bodyGradA2)" stroke="#a16207" stroke-width="0.5"/>
+  <!-- Wing surface detail -->
+  <line x1="230" y1="55" x2="100" y2="10" stroke="#92400e" stroke-width="0.3" opacity="0.4"/>
+  <line x1="230" y1="55" x2="100" y2="100" stroke="#92400e" stroke-width="0.3" opacity="0.4"/>
+  <!-- Vertical stabilizer -->
+  <polygon points="45,40 35,18 52,18 52,40" fill="#713f12" stroke="#92400e" stroke-width="0.5"/>
+  <!-- Warhead (nose) -->
+  <path d="M230 55 Q245 48 250 55 Q245 62 230 55Z" fill="#eab308"/>
+  <!-- Engine intake -->
+  <ellipse cx="65" cy="40" rx="10" ry="4" fill="#451a03" stroke="#78350f" stroke-width="0.3"/>
+  <!-- Payload marking -->
+  <rect x="140" y="48" width="50" height="4" rx="2" fill="#ca8a04" opacity="0.25"/>
+  <!-- Markings -->
+  <text x="145" y="60" text-anchor="middle" font-family="monospace" font-size="6" fill="#fde68a" opacity="0.6">آرش-۲</text>
+  <text x="145" y="95" text-anchor="middle" font-family="monospace" font-size="4" fill="#a16207" opacity="0.4">H-OWA · Jet-Powered · 50kg W/H</text>
+</svg>

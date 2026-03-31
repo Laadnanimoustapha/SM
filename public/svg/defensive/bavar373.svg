@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 180" width="300" height="180">
+  <!-- Bavar-373 — Iranian Long-Range SAM (S-300 equivalent) -->
+  <defs>
+    <linearGradient id="truckGradB" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a3a2a"/>
+      <stop offset="50%" stop-color="#2d5a40"/>
+      <stop offset="100%" stop-color="#1a3a2a"/>
+    </linearGradient>
+    <linearGradient id="tubeGradB" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a6b5a"/>
+      <stop offset="50%" stop-color="#0abde3"/>
+      <stop offset="100%" stop-color="#1a6b5a"/>
+    </linearGradient>
+  </defs>
+  <!-- TEL Vehicle -->
+  <rect x="35" y="130" width="230" height="28" rx="3" fill="url(#truckGradB)" stroke="#1a3a2a" stroke-width="1"/>
+  <!-- Wheels (8x8) -->
+  <circle cx="65" cy="163" r="9" fill="#111" stroke="#333" stroke-width="1.5"/>
+  <circle cx="90" cy="163" r="9" fill="#111" stroke="#333" stroke-width="1.5"/>
+  <circle cx="205" cy="163" r="9" fill="#111" stroke="#333" stroke-width="1.5"/>
+  <circle cx="230" cy="163" r="9" fill="#111" stroke="#333" stroke-width="1.5"/>
+  <!-- Hub caps -->
+  <circle cx="65" cy="163" r="3.5" fill="#444"/>
+  <circle cx="90" cy="163" r="3.5" fill="#444"/>
+  <circle cx="205" cy="163" r="3.5" fill="#444"/>
+  <circle cx="230" cy="163" r="3.5" fill="#444"/>
+  <!-- Cab -->
+  <rect x="35" y="115" width="45" height="18" rx="3" fill="#1a3a2a" stroke="#0f2920" stroke-width="0.5"/>
+  <rect x="40" y="118" width="18" height="10" rx="1" fill="#0f2920" opacity="0.5"/>
+  <!-- Sayyad-4 missile tubes (vertical launch) -->
+  <g transform="rotate(-60, 170, 130)">
+    <rect x="105" y="108" width="18" height="120" rx="9" fill="url(#tubeGradB)" stroke="#0abde3" stroke-width="0.5"/>
+    <rect x="130" y="108" width="18" height="120" rx="9" fill="url(#tubeGradB)" stroke="#0abde3" stroke-width="0.5"/>
+    <rect x="155" y="108" width="18" height="120" rx="9" fill="url(#tubeGradB)" stroke="#0abde3" stroke-width="0.5"/>
+    <rect x="180" y="108" width="18" height="120" rx="9" fill="url(#tubeGradB)" stroke="#0abde3" stroke-width="0.5"/>
+    <!-- Caps -->
+    <ellipse cx="114" cy="108" rx="9" ry="4.5" fill="#15967a"/>
+    <ellipse cx="139" cy="108" rx="9" ry="4.5" fill="#15967a"/>
+    <ellipse cx="164" cy="108" rx="9" ry="4.5" fill="#15967a"/>
+    <ellipse cx="189" cy="108" rx="9" ry="4.5" fill="#15967a"/>
+  </g>
+  <!-- AESA Radar -->
+  <rect x="258" y="110" width="4" height="22" fill="#1a3a2a"/>
+  <rect x="248" y="102" width="24" height="12" rx="2" fill="#0f2920" stroke="#0abde3" stroke-width="1"/>
+  <line x1="252" y1="105" x2="268" y2="105" stroke="#0abde3" stroke-width="0.5" opacity="0.5"/>
+  <line x1="252" y1="108" x2="268" y2="108" stroke="#0abde3" stroke-width="0.5" opacity="0.5"/>
+  <line x1="252" y1="111" x2="268" y2="111" stroke="#0abde3" stroke-width="0.5" opacity="0.5"/>
+  <!-- Label -->
+  <text x="150" y="12" text-anchor="middle" font-family="monospace" font-size="8" fill="#0abde3" font-weight="bold">BAVAR-373</text>
+  <text x="150" y="24" text-anchor="middle" font-family="monospace" font-size="5" fill="#67e8f9" opacity="0.6">Sayyad-4 · 300km Range · AESA</text>
+</svg>

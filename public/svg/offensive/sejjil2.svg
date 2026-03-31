@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 480" width="130" height="480">
+  <!-- Sejjil-2 — Solid-Fuel Two-Stage MRBM -->
+  <defs>
+    <linearGradient id="bodyGradSJ" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#5b1a1a"/>
+      <stop offset="30%" stop-color="#8b2c2c"/>
+      <stop offset="70%" stop-color="#8b2c2c"/>
+      <stop offset="100%" stop-color="#5b1a1a"/>
+    </linearGradient>
+    <radialGradient id="flameGradSJ" cx="50%" cy="0%" r="85%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="20%" stop-color="#fde68a"/>
+      <stop offset="50%" stop-color="#f97316"/>
+      <stop offset="80%" stop-color="#dc2626"/>
+      <stop offset="100%" stop-color="#7f1d1d" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Massive exhaust (solid fuel = bright) -->
+  <ellipse cx="65" cy="465" rx="20" ry="30" fill="url(#flameGradSJ)" opacity="0.95"/>
+  <ellipse cx="65" cy="458" rx="11" ry="18" fill="#fefce8" opacity="0.9"/>
+  <!-- Fins -->
+  <polygon points="42,400 18,440 42,430" fill="#3b0a0a" stroke="#5b1a1a" stroke-width="0.5"/>
+  <polygon points="88,400 112,440 88,430" fill="#3b0a0a" stroke="#5b1a1a" stroke-width="0.5"/>
+  <polygon points="58,400 55,442 65,430" fill="#3b0a0a"/>
+  <polygon points="72,400 75,442 65,430" fill="#3b0a0a"/>
+  <!-- Stage 1 (larger) -->
+  <rect x="42" y="280" width="46" height="155" rx="5" fill="url(#bodyGradSJ)"/>
+  <!-- Stage separation ring (prominent) -->
+  <rect x="38" y="270" width="54" height="14" rx="3" fill="#991b1b"/>
+  <rect x="40" y="273" width="50" height="8" rx="2" fill="#b91c1c"/>
+  <!-- Stage 2 (slightly narrower) -->
+  <rect x="44" y="100" width="42" height="174" rx="4" fill="url(#bodyGradSJ)"/>
+  <!-- Nosecone / RV -->
+  <path d="M65 10 Q42 60 44 100 L86 100 Q88 60 65 10Z" fill="#7f1d1d"/>
+  <!-- White tip marking -->
+  <path d="M65 10 Q54 35 52 50 L78 50 Q76 35 65 10Z" fill="#fecaca" opacity="0.15"/>
+  <!-- Stage markings -->
+  <text x="65" y="360" text-anchor="middle" font-family="monospace" font-size="5" fill="#fca5a5" opacity="0.4">STG-1</text>
+  <text x="65" y="200" text-anchor="middle" font-family="monospace" font-size="5" fill="#fca5a5" opacity="0.4">STG-2</text>
+  <!-- Main label -->
+  <text x="65" y="240" text-anchor="middle" font-family="monospace" font-size="7" fill="#fecaca" opacity="0.6">سجیل-۲</text>
+  <text x="65" y="255" text-anchor="middle" font-family="monospace" font-size="5" fill="#fca5a5" opacity="0.4">SOLID MRBM</text>
+</svg>

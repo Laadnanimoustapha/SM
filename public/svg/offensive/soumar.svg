@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" width="300" height="100">
+  <!-- Soumar GLCM — Ground-Launched Cruise Missile (terrain-following) -->
+  <defs>
+    <linearGradient id="bodyGradS" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#78716c"/>
+      <stop offset="50%" stop-color="#a8a29e"/>
+      <stop offset="100%" stop-color="#78716c"/>
+    </linearGradient>
+    <radialGradient id="jetGrad" cx="100%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#fef3c7"/>
+      <stop offset="40%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#92400e" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Jet exhaust -->
+  <ellipse cx="12" cy="50" rx="18" ry="8" fill="url(#jetGrad)" opacity="0.85"/>
+  <!-- Main body (cylindrical fuselage) -->
+  <rect x="30" y="38" width="220" height="24" rx="12" fill="url(#bodyGradS)"/>
+  <!-- Intake scoop (bottom) -->
+  <rect x="140" y="62" width="40" height="6" rx="2" fill="#57534e"/>
+  <!-- Wings (swept) -->
+  <polygon points="120,38 85,12 95,12 135,38" fill="#57534e" stroke="#78716c" stroke-width="0.5"/>
+  <polygon points="120,62 85,88 95,88 135,62" fill="#57534e" stroke="#78716c" stroke-width="0.5"/>
+  <!-- Tail fins -->
+  <polygon points="35,38 25,22 35,28" fill="#44403c"/>
+  <polygon points="35,62 25,78 35,72" fill="#44403c"/>
+  <polygon points="30,45 20,50 30,55" fill="#44403c"/>
+  <!-- Nosecone (guidance seeker) -->
+  <path d="M250 50 Q270 42 280 50 Q270 58 250 50Z" fill="#d97706"/>
+  <ellipse cx="272" cy="50" rx="3" ry="4" fill="#1c1917" stroke="#d97706" stroke-width="0.5"/>
+  <!-- TERCOM window -->
+  <rect x="200" y="62" width="12" height="4" rx="1" fill="#1c1917" stroke="#78716c" stroke-width="0.3"/>
+  <!-- Markings -->
+  <text x="160" y="54" text-anchor="middle" font-family="monospace" font-size="6" fill="#e7e5e4" opacity="0.5">سومار</text>
+  <text x="160" y="36" text-anchor="middle" font-family="monospace" font-size="4" fill="#a8a29e" opacity="0.4">GLCM · Mach 0.65</text>
+</svg>

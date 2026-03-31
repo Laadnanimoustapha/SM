@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 180" width="300" height="180">
+  <!-- S-300PMU-2 (SA-20B) — Long Range SAM System -->
+  <defs>
+    <linearGradient id="truckGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2d4a22"/>
+      <stop offset="50%" stop-color="#3d6b2e"/>
+      <stop offset="100%" stop-color="#2d4a22"/>
+    </linearGradient>
+    <linearGradient id="tubeGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3d6b2e"/>
+      <stop offset="50%" stop-color="#5a9e42"/>
+      <stop offset="100%" stop-color="#3d6b2e"/>
+    </linearGradient>
+  </defs>
+  <!-- TEL truck body -->
+  <rect x="40" y="130" width="220" height="30" rx="3" fill="url(#truckGrad)" stroke="#2d4a22" stroke-width="1"/>
+  <!-- Wheels -->
+  <circle cx="70" cy="165" r="10" fill="#1a1a1a" stroke="#333" stroke-width="1.5"/>
+  <circle cx="100" cy="165" r="10" fill="#1a1a1a" stroke="#333" stroke-width="1.5"/>
+  <circle cx="200" cy="165" r="10" fill="#1a1a1a" stroke="#333" stroke-width="1.5"/>
+  <circle cx="230" cy="165" r="10" fill="#1a1a1a" stroke="#333" stroke-width="1.5"/>
+  <!-- Hub caps -->
+  <circle cx="70" cy="165" r="4" fill="#444"/>
+  <circle cx="100" cy="165" r="4" fill="#444"/>
+  <circle cx="200" cy="165" r="4" fill="#444"/>
+  <circle cx="230" cy="165" r="4" fill="#444"/>
+  <!-- Cab -->
+  <rect x="40" y="115" width="50" height="18" rx="3" fill="#2d4a22" stroke="#1a2e15" stroke-width="0.5"/>
+  <rect x="45" y="118" width="20" height="10" rx="1" fill="#1a2e15" opacity="0.5"/>
+  <!-- Missile canisters (4 tubes, erected at angle) -->
+  <g transform="rotate(-55, 170, 130)">
+    <rect x="110" y="115" width="16" height="110" rx="8" fill="url(#tubeGrad)" stroke="#3d6b2e" stroke-width="0.5"/>
+    <rect x="132" y="115" width="16" height="110" rx="8" fill="url(#tubeGrad)" stroke="#3d6b2e" stroke-width="0.5"/>
+    <rect x="154" y="115" width="16" height="110" rx="8" fill="url(#tubeGrad)" stroke="#3d6b2e" stroke-width="0.5"/>
+    <rect x="176" y="115" width="16" height="110" rx="8" fill="url(#tubeGrad)" stroke="#3d6b2e" stroke-width="0.5"/>
+    <!-- Canister caps -->
+    <ellipse cx="118" cy="115" rx="8" ry="4" fill="#4a7a38"/>
+    <ellipse cx="140" cy="115" rx="8" ry="4" fill="#4a7a38"/>
+    <ellipse cx="162" cy="115" rx="8" ry="4" fill="#4a7a38"/>
+    <ellipse cx="184" cy="115" rx="8" ry="4" fill="#4a7a38"/>
+  </g>
+  <!-- Radar dish (small) -->
+  <rect x="255" y="120" width="3" height="18" fill="#3d6b2e"/>
+  <ellipse cx="256" cy="118" rx="12" ry="8" fill="none" stroke="#54a0ff" stroke-width="1.5"/>
+  <ellipse cx="256" cy="118" rx="8" ry="5" fill="none" stroke="#54a0ff" stroke-width="0.8" opacity="0.5"/>
+  <!-- System label -->
+  <text x="150" y="12" text-anchor="middle" font-family="monospace" font-size="8" fill="#54a0ff" font-weight="bold">S-300PMU-2</text>
+  <text x="150" y="24" text-anchor="middle" font-family="monospace" font-size="5" fill="#93c5fd" opacity="0.6">SA-20B Gargoyle · 200km Range</text>
+</svg>

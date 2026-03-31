@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 100" width="260" height="100">
+  <!-- Shahed-136 — Kamikaze / One-Way-Attack (OWA) Drone -->
+  <defs>
+    <linearGradient id="bodyGradSH" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#525252"/>
+      <stop offset="50%" stop-color="#737373"/>
+      <stop offset="100%" stop-color="#525252"/>
+    </linearGradient>
+  </defs>
+  <!-- Pusher propeller (rear) -->
+  <line x1="18" y1="30" x2="18" y2="70" stroke="#a3a3a3" stroke-width="1.5" opacity="0.5"/>
+  <ellipse cx="18" cy="50" rx="2" ry="18" fill="#a3a3a3" opacity="0.3"/>
+  <!-- Delta wing body -->
+  <polygon points="240,50 80,10 30,42 30,58 80,90 240,50" fill="url(#bodyGradSH)" stroke="#737373" stroke-width="0.5"/>
+  <!-- Wing leading edge highlights -->
+  <line x1="240" y1="50" x2="80" y2="10" stroke="#a3a3a3" stroke-width="0.5" opacity="0.3"/>
+  <line x1="240" y1="50" x2="80" y2="90" stroke="#a3a3a3" stroke-width="0.5" opacity="0.3"/>
+  <!-- Vertical stabilizer -->
+  <polygon points="50,42 40,20 55,20 55,42" fill="#404040" stroke="#525252" stroke-width="0.5"/>
+  <!-- Warhead section (nose) -->
+  <path d="M240 50 Q250 46 255 50 Q250 54 240 50Z" fill="#eab308"/>
+  <!-- Engine intake (top) -->
+  <ellipse cx="60" cy="42" rx="8" ry="3" fill="#292524" stroke="#525252" stroke-width="0.3"/>
+  <!-- GPS antenna dome -->
+  <circle cx="150" cy="40" r="3" fill="#404040" stroke="#737373" stroke-width="0.3"/>
+  <!-- Markings -->
+  <text x="155" y="55" text-anchor="middle" font-family="monospace" font-size="6" fill="#fde047" opacity="0.6">شاهد-۱۳۶</text>
+  <text x="155" y="68" text-anchor="middle" font-family="monospace" font-size="4" fill="#a3a3a3" opacity="0.4">OWA · Loitering Munition</text>
+</svg>

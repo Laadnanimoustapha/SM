@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 120" width="300" height="120">
+  <!-- Fattah-1 — Hypersonic Glide Vehicle (HGV) -->
+  <defs>
+    <linearGradient id="bodyGradHGV" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7f1d1d"/>
+      <stop offset="40%" stop-color="#b91c1c"/>
+      <stop offset="100%" stop-color="#ef4444"/>
+    </linearGradient>
+    <radialGradient id="plasmaGrad" cx="100%" cy="50%" r="40%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="20%" stop-color="#fde047"/>
+      <stop offset="50%" stop-color="#f97316"/>
+      <stop offset="85%" stop-color="#dc2626"/>
+      <stop offset="100%" stop-color="#7f1d1d" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="shockGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#fef08a" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#f97316" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <!-- Plasma shockwave cone -->
+  <polygon points="280,60 300,30 300,90" fill="url(#shockGrad)" opacity="0.5"/>
+  <!-- Exhaust plume -->
+  <ellipse cx="18" cy="60" rx="25" ry="12" fill="url(#plasmaGrad)" opacity="0.8"/>
+  <!-- HGV Waverider body (wedge shape) -->
+  <polygon points="270,60 180,30 40,40 30,55 30,65 40,80 180,90 270,60" fill="url(#bodyGradHGV)" stroke="#ef4444" stroke-width="0.5"/>
+  <!-- Top surface highlight -->
+  <polygon points="270,60 180,32 60,42 55,55 180,55 270,60" fill="#fca5a5" opacity="0.08"/>
+  <!-- Control surfaces / fins -->
+  <polygon points="60,40 45,18 55,18 68,40" fill="#991b1b"/>
+  <polygon points="60,80 45,102 55,102 68,80" fill="#991b1b"/>
+  <!-- Nosecone heat shield -->
+  <path d="M270 60 Q280 54 285 60 Q280 66 270 60Z" fill="#fef08a" opacity="0.6"/>
+  <!-- Seeker aperture -->
+  <ellipse cx="278" cy="60" rx="2" ry="3" fill="#450a0a" stroke="#fbbf24" stroke-width="0.5"/>
+  <!-- Thermal tiles pattern -->
+  <line x1="100" y1="45" x2="100" y2="75" stroke="#7f1d1d" stroke-width="0.3" opacity="0.3"/>
+  <line x1="140" y1="38" x2="140" y2="82" stroke="#7f1d1d" stroke-width="0.3" opacity="0.3"/>
+  <line x1="180" y1="33" x2="180" y2="87" stroke="#7f1d1d" stroke-width="0.3" opacity="0.3"/>
+  <line x1="220" y1="40" x2="220" y2="80" stroke="#7f1d1d" stroke-width="0.3" opacity="0.3"/>
+  <!-- Speed indicator -->
+  <text x="155" y="25" text-anchor="middle" font-family="monospace" font-size="5" fill="#fca5a5" opacity="0.5">⚡ MACH 15 · HYPERSONIC</text>
+  <!-- Markings -->
+  <text x="155" y="65" text-anchor="middle" font-family="monospace" font-size="7" fill="#fef2f2" opacity="0.6">فتاح-۱</text>
+  <text x="155" y="108" text-anchor="middle" font-family="monospace" font-size="5" fill="#fca5a5" opacity="0.4">HGV · Skip-Glide MaRV</text>
+</svg>

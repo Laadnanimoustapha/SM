@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 160" width="200" height="160">
+  <!-- Phalanx CIWS (Mk 15) — Last-Resort Close-In Weapon System -->
+  <defs>
+    <linearGradient id="ciwsBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6b6b6b"/>
+      <stop offset="50%" stop-color="#a0a0a0"/>
+      <stop offset="100%" stop-color="#6b6b6b"/>
+    </linearGradient>
+  </defs>
+  <!-- Pedestal base -->
+  <rect x="70" y="125" width="60" height="20" rx="3" fill="#555"/>
+  <rect x="60" y="140" width="80" height="10" rx="2" fill="#444"/>
+  <!-- Main dome (radome / search radar) -->
+  <ellipse cx="100" cy="85" rx="30" ry="35" fill="url(#ciwsBody)" stroke="#888" stroke-width="1"/>
+  <!-- Dome top (white radome like real Phalanx) -->
+  <ellipse cx="100" cy="62" rx="22" ry="20" fill="#e0e0e0" stroke="#ccc" stroke-width="0.5"/>
+  <!-- Tracking radar (below barrel) -->
+  <rect x="88" y="90" width="24" height="15" rx="3" fill="#555" stroke="#ff9ff3" stroke-width="0.8"/>
+  <circle cx="100" cy="97" r="5" fill="#333" stroke="#ff9ff3" stroke-width="0.5"/>
+  <!-- M61 Vulcan 20mm gatling barrel cluster -->
+  <rect x="130" y="82" width="55" height="3" rx="1.5" fill="#888"/>
+  <rect x="130" y="87" width="55" height="3" rx="1.5" fill="#888"/>
+  <rect x="130" y="92" width="55" height="3" rx="1.5" fill="#888"/>
+  <rect x="130" y="97" width="55" height="3" rx="1.5" fill="#888"/>
+  <!-- Muzzle flash zone -->
+  <circle cx="188" cy="90" r="6" fill="#ff9ff3" opacity="0.15"/>
+  <!-- Ammo drum (side bulge) -->
+  <ellipse cx="78" cy="100" rx="12" ry="18" fill="#777" stroke="#888" stroke-width="0.5"/>
+  <!-- Label -->
+  <text x="100" y="12" text-anchor="middle" font-family="monospace" font-size="8" fill="#ff9ff3" font-weight="bold">PHALANX CIWS</text>
+  <text x="100" y="24" text-anchor="middle" font-family="monospace" font-size="5" fill="#f0abfc" opacity="0.6">Mk 15 · 20mm Vulcan · 4500 RPM</text>
+</svg>

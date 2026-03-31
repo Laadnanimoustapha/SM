@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 180" width="280" height="180">
+  <!-- THAAD — Terminal High Altitude Area Defense -->
+  <defs>
+    <linearGradient id="thaadPlatform" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3d3520"/>
+      <stop offset="50%" stop-color="#5a5030"/>
+      <stop offset="100%" stop-color="#3d3520"/>
+    </linearGradient>
+    <linearGradient id="thaadCanister" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5a4a20"/>
+      <stop offset="50%" stop-color="#fdcb6e"/>
+      <stop offset="100%" stop-color="#5a4a20"/>
+    </linearGradient>
+  </defs>
+  <!-- Heavy truck chassis -->
+  <rect x="20" y="135" width="240" height="25" rx="3" fill="#2a2515"/>
+  <!-- Wheels (10x10) -->
+  <circle cx="50" cy="165" r="9" fill="#111" stroke="#333" stroke-width="1.5"/>
+  <circle cx="75" cy="165" r="9" fill="#111" stroke="#333" stroke-width="1.5"/>
+  <circle cx="100" cy="165" r="9" fill="#111" stroke="#333" stroke-width="1.5"/>
+  <circle cx="180" cy="165" r="9" fill="#111" stroke="#333" stroke-width="1.5"/>
+  <circle cx="205" cy="165" r="9" fill="#111" stroke="#333" stroke-width="1.5"/>
+  <circle cx="230" cy="165" r="9" fill="#111" stroke="#333" stroke-width="1.5"/>
+  <!-- Cab -->
+  <rect x="20" y="118" width="45" height="20" rx="3" fill="#3d3520"/>
+  <rect x="25" y="122" width="18" height="10" rx="1" fill="#2a2515" opacity="0.5"/>
+  <!-- THAAD launch canisters (8 interceptors, near vertical) -->
+  <g transform="rotate(-75, 160, 135)">
+    <rect x="90" y="60" width="14" height="100" rx="7" fill="url(#thaadCanister)" stroke="#fdcb6e" stroke-width="0.4"/>
+    <rect x="108" y="60" width="14" height="100" rx="7" fill="url(#thaadCanister)" stroke="#fdcb6e" stroke-width="0.4"/>
+    <rect x="126" y="60" width="14" height="100" rx="7" fill="url(#thaadCanister)" stroke="#fdcb6e" stroke-width="0.4"/>
+    <rect x="144" y="60" width="14" height="100" rx="7" fill="url(#thaadCanister)" stroke="#fdcb6e" stroke-width="0.4"/>
+    <rect x="162" y="60" width="14" height="100" rx="7" fill="url(#thaadCanister)" stroke="#fdcb6e" stroke-width="0.4"/>
+    <rect x="180" y="60" width="14" height="100" rx="7" fill="url(#thaadCanister)" stroke="#fdcb6e" stroke-width="0.4"/>
+    <rect x="198" y="60" width="14" height="100" rx="7" fill="url(#thaadCanister)" stroke="#fdcb6e" stroke-width="0.4"/>
+    <rect x="216" y="60" width="14" height="100" rx="7" fill="url(#thaadCanister)" stroke="#fdcb6e" stroke-width="0.4"/>
+  </g>
+  <!-- AN/TPY-2 X-band radar reference -->
+  <rect x="255" y="130" width="15" height="6" rx="1" fill="#3d3520"/>
+  <!-- Label -->
+  <text x="140" y="12" text-anchor="middle" font-family="monospace" font-size="9" fill="#fdcb6e" font-weight="bold">THAAD</text>
+  <text x="140" y="26" text-anchor="middle" font-family="monospace" font-size="5" fill="#fde68a" opacity="0.6">Terminal High Altitude · Exo-Atmospheric · 200km</text>
+</svg>

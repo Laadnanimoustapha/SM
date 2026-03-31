@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 460" width="130" height="460">
+  <!-- Emad — Precision-Guided Long Range Ballistic Missile (MaRV) -->
+  <defs>
+    <linearGradient id="bodyGradE" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2d3748"/>
+      <stop offset="30%" stop-color="#4a5568"/>
+      <stop offset="70%" stop-color="#4a5568"/>
+      <stop offset="100%" stop-color="#2d3748"/>
+    </linearGradient>
+    <linearGradient id="marvGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#991b1b"/>
+      <stop offset="50%" stop-color="#dc2626"/>
+      <stop offset="100%" stop-color="#991b1b"/>
+    </linearGradient>
+    <radialGradient id="flameGradE" cx="50%" cy="0%" r="80%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="20%" stop-color="#fde68a"/>
+      <stop offset="50%" stop-color="#ea580c"/>
+      <stop offset="100%" stop-color="#991b1b" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Exhaust -->
+  <ellipse cx="65" cy="445" rx="18" ry="28" fill="url(#flameGradE)" opacity="0.9"/>
+  <ellipse cx="65" cy="440" rx="10" ry="16" fill="#fef9c3" opacity="0.85"/>
+  <!-- Fins -->
+  <polygon points="40,380 18,418 40,410" fill="#1a202c" stroke="#2d3748" stroke-width="0.5"/>
+  <polygon points="90,380 112,418 90,410" fill="#1a202c" stroke="#2d3748" stroke-width="0.5"/>
+  <polygon points="58,380 56,420 65,410" fill="#1a202c" stroke="#2d3748" stroke-width="0.5"/>
+  <polygon points="72,380 74,420 65,410" fill="#1a202c" stroke="#2d3748" stroke-width="0.5"/>
+  <!-- Booster -->
+  <rect x="42" y="260" width="46" height="155" rx="4" fill="url(#bodyGradE)"/>
+  <!-- Stage separator -->
+  <rect x="39" y="253" width="52" height="10" rx="2" fill="#4a5568"/>
+  <!-- Upper stage -->
+  <rect x="43" y="100" width="44" height="156" rx="4" fill="url(#bodyGradE)"/>
+  <!-- MaRV warhead (maneuverable re-entry vehicle) — distinctive conical -->
+  <path d="M65 8 Q40 55 43 80 L87 80 Q90 55 65 8Z" fill="url(#marvGrad)"/>
+  <!-- MaRV control surfaces (small canards) -->
+  <line x1="43" y1="72" x2="32" y2="65" stroke="#dc2626" stroke-width="2"/>
+  <line x1="87" y1="72" x2="98" y2="65" stroke="#dc2626" stroke-width="2"/>
+  <!-- Guidance window -->
+  <ellipse cx="65" cy="50" rx="5" ry="3" fill="#1a202c" stroke="#dc2626" stroke-width="0.5"/>
+  <!-- RV separation seam -->
+  <line x1="43" y1="100" x2="87" y2="100" stroke="#c53030" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <!-- Panel lines -->
+  <line x1="42" y1="180" x2="88" y2="180" stroke="#1a202c" stroke-width="0.5" opacity="0.4"/>
+  <line x1="42" y1="330" x2="88" y2="330" stroke="#1a202c" stroke-width="0.5" opacity="0.4"/>
+  <!-- Markings -->
+  <text x="65" y="210" text-anchor="middle" font-family="monospace" font-size="7" fill="#a0aec0" opacity="0.6">عماد</text>
+  <text x="65" y="225" text-anchor="middle" font-family="monospace" font-size="5" fill="#a0aec0" opacity="0.4">MaRV MRBM</text>
+</svg>

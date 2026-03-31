@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 170" width="280" height="170">
+  <!-- Iron Dome (Tamir C-RAM) — Counter Rocket Artillery Mortar -->
+  <defs>
+    <linearGradient id="idomePlatform" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a3a3a"/>
+      <stop offset="50%" stop-color="#2d5a5a"/>
+      <stop offset="100%" stop-color="#1a3a3a"/>
+    </linearGradient>
+    <linearGradient id="idomeCanister" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0d4848"/>
+      <stop offset="50%" stop-color="#00cec9"/>
+      <stop offset="100%" stop-color="#0d4848"/>
+    </linearGradient>
+  </defs>
+  <!-- Platform base -->
+  <rect x="60" y="140" width="160" height="15" rx="3" fill="url(#idomePlatform)"/>
+  <!-- Support legs -->
+  <rect x="70" y="150" width="8" height="12" fill="#1a3a3a"/>
+  <rect x="202" y="150" width="8" height="12" fill="#1a3a3a"/>
+  <!-- Launcher frame (tilted) -->
+  <g transform="rotate(-40, 140, 140)">
+    <!-- 20 Tamir canister tubes (4x5 grid) -->
+    <rect x="80" y="70" width="120" height="75" rx="5" fill="#0d3838" stroke="#00cec9" stroke-width="0.5"/>
+    <!-- Tubes -->
+    <g fill="#0a2e2e" stroke="#00cec9" stroke-width="0.3">
+      <circle cx="98" cy="82" r="5"/>  <circle cx="112" cy="82" r="5"/>
+      <circle cx="126" cy="82" r="5"/> <circle cx="140" cy="82" r="5"/>
+      <circle cx="154" cy="82" r="5"/> <circle cx="168" cy="82" r="5"/>
+      <circle cx="182" cy="82" r="5"/>
+      <circle cx="98" cy="96" r="5"/>  <circle cx="112" cy="96" r="5"/>
+      <circle cx="126" cy="96" r="5"/> <circle cx="140" cy="96" r="5"/>
+      <circle cx="154" cy="96" r="5"/> <circle cx="168" cy="96" r="5"/>
+      <circle cx="182" cy="96" r="5"/>
+      <circle cx="98" cy="110" r="5"/>  <circle cx="112" cy="110" r="5"/>
+      <circle cx="126" cy="110" r="5"/> <circle cx="140" cy="110" r="5"/>
+      <circle cx="154" cy="110" r="5"/> <circle cx="168" cy="110" r="5"/>
+    </g>
+  </g>
+  <!-- EL/M-2084 Radar (dome shape reference) -->
+  <path d="M245 120 Q255 100 265 120" fill="none" stroke="#00cec9" stroke-width="1.5"/>
+  <rect x="252" y="120" width="4" height="25" fill="#1a3a3a"/>
+  <!-- Label -->
+  <text x="140" y="12" text-anchor="middle" font-family="monospace" font-size="8" fill="#00cec9" font-weight="bold">IRON DOME</text>
+  <text x="140" y="24" text-anchor="middle" font-family="monospace" font-size="5" fill="#5eead4" opacity="0.6">Tamir C-RAM · 70km Range · 20 Interceptors</text>
+</svg>

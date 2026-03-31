@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 100" width="280" height="100">
+  <!-- Mohajer-6 — ISR / Recon Drone -->
+  <defs>
+    <linearGradient id="bodyGradM6" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#60a5fa"/>
+      <stop offset="50%" stop-color="#93c5fd"/>
+      <stop offset="100%" stop-color="#60a5fa"/>
+    </linearGradient>
+  </defs>
+  <!-- Propeller -->
+  <line x1="15" y1="30" x2="15" y2="70" stroke="#bfdbfe" stroke-width="1.5" opacity="0.4"/>
+  <!-- Fuselage -->
+  <rect x="30" y="40" width="180" height="20" rx="10" fill="url(#bodyGradM6)"/>
+  <!-- High-aspect-ratio wings -->
+  <polygon points="90,40 50,5 55,5 100,40" fill="#3b82f6" stroke="#60a5fa" stroke-width="0.5"/>
+  <polygon points="90,60 50,95 55,95 100,60" fill="#3b82f6" stroke="#60a5fa" stroke-width="0.5"/>
+  <polygon points="120,40 130,5 135,5 130,40" fill="#3b82f6" stroke="#60a5fa" stroke-width="0.5"/>
+  <polygon points="120,60 130,95 135,95 130,60" fill="#3b82f6" stroke="#60a5fa" stroke-width="0.5"/>
+  <!-- V-tail -->
+  <polygon points="35,40 22,22 38,30" fill="#2563eb"/>
+  <polygon points="35,60 22,78 38,70" fill="#2563eb"/>
+  <!-- EO/IR sensor turret -->
+  <circle cx="200" cy="62" r="6" fill="#1e3a5f" stroke="#60a5fa" stroke-width="0.5"/>
+  <circle cx="200" cy="62" r="3" fill="#0c1e36" stroke="#3b82f6" stroke-width="0.3"/>
+  <!-- Nose -->
+  <path d="M210 50 Q225 45 230 50 Q225 55 210 50Z" fill="#93c5fd"/>
+  <!-- Radar dome -->
+  <ellipse cx="215" cy="45" rx="5" ry="3" fill="#172554" stroke="#60a5fa" stroke-width="0.3"/>
+  <!-- Scan arc symbol -->
+  <path d="M200 40 A 25 25 0 0 1 225 50" fill="none" stroke="#60a5fa" stroke-width="0.8" opacity="0.4" stroke-dasharray="2,2"/>
+  <path d="M200 36 A 30 30 0 0 1 230 50" fill="none" stroke="#60a5fa" stroke-width="0.5" opacity="0.25" stroke-dasharray="2,2"/>
+  <!-- Markings -->
+  <text x="130" y="54" text-anchor="middle" font-family="monospace" font-size="5.5" fill="#dbeafe" opacity="0.6">مهاجر-۶</text>
+  <text x="130" y="37" text-anchor="middle" font-family="monospace" font-size="4" fill="#93c5fd" opacity="0.4">ISR · EO/IR SIGINT</text>
+</svg>

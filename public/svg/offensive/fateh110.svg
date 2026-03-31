@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 320" width="100" height="320">
+  <!-- Fateh-110 — Precision Short-Range Ballistic Missile (solid fuel) -->
+  <defs>
+    <linearGradient id="bodyGradF" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4a2060"/>
+      <stop offset="30%" stop-color="#6b3fa0"/>
+      <stop offset="70%" stop-color="#6b3fa0"/>
+      <stop offset="100%" stop-color="#4a2060"/>
+    </linearGradient>
+    <linearGradient id="noseGradF" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9b2c8e"/>
+      <stop offset="50%" stop-color="#e84393"/>
+      <stop offset="100%" stop-color="#9b2c8e"/>
+    </linearGradient>
+    <radialGradient id="flameGradF" cx="50%" cy="0%" r="75%">
+      <stop offset="0%" stop-color="#fff"/>
+      <stop offset="30%" stop-color="#fbbf24"/>
+      <stop offset="65%" stop-color="#ea580c"/>
+      <stop offset="100%" stop-color="#be123c" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Exhaust -->
+  <ellipse cx="50" cy="308" rx="12" ry="20" fill="url(#flameGradF)" opacity="0.9"/>
+  <ellipse cx="50" cy="304" rx="7" ry="12" fill="#fef3c7" opacity="0.8"/>
+  <!-- Grid fins (precision) -->
+  <rect x="28" y="265" width="3" height="30" rx="1" fill="#2d1745" stroke="#4a2060" stroke-width="0.5"/>
+  <rect x="69" y="265" width="3" height="30" rx="1" fill="#2d1745" stroke="#4a2060" stroke-width="0.5"/>
+  <polygon points="35,272 22,294 35,290" fill="#2d1745"/>
+  <polygon points="65,272 78,294 65,290" fill="#2d1745"/>
+  <!-- Single-stage body -->
+  <rect x="36" y="60" width="28" height="230" rx="3" fill="url(#bodyGradF)"/>
+  <!-- Guidance section -->
+  <rect x="36" y="50" width="28" height="15" rx="2" fill="#7c3aed"/>
+  <!-- Nosecone -->
+  <path d="M50 8 Q36 40 36 50 L64 50 Q64 40 50 8Z" fill="url(#noseGradF)"/>
+  <!-- Seeker window -->
+  <ellipse cx="50" cy="30" rx="4" ry="2.5" fill="#1a0a25" stroke="#e84393" stroke-width="0.5"/>
+  <!-- Panel lines -->
+  <line x1="36" y1="130" x2="64" y2="130" stroke="#2d1745" stroke-width="0.5" opacity="0.4"/>
+  <line x1="36" y1="200" x2="64" y2="200" stroke="#2d1745" stroke-width="0.5" opacity="0.4"/>
+  <!-- Markings -->
+  <text x="50" y="165" text-anchor="middle" font-family="monospace" font-size="6" fill="#c4b5fd" opacity="0.6">فاتح-۱۱۰</text>
+  <text x="50" y="178" text-anchor="middle" font-family="monospace" font-size="4.5" fill="#c4b5fd" opacity="0.4">CEP 100m</text>
+</svg>
