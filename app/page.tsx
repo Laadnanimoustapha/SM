@@ -5,6 +5,20 @@ import { Simulation } from '@/lib/game/simulation';
 import { Renderer } from '@/lib/game/renderer';
 import type { WeaponData, SimulationState } from '@/types/game';
 
+const WEAPON_SVG: Record<string, string> = {
+  shahab1: '/svg/offensive/shahab1.svg', shahab3: '/svg/offensive/shahab3.svg',
+  emad: '/svg/offensive/emad.svg', khorramshahr: '/svg/offensive/khorramshahr.svg',
+  fateh110: '/svg/offensive/fateh110.svg', soumar: '/svg/offensive/soumar.svg',
+  mohajer6: '/svg/offensive/mohajer6.svg', shahed136: '/svg/offensive/shahed136.svg',
+  sejjil2: '/svg/offensive/sejjil2.svg', fattah1: '/svg/offensive/fattah1.svg',
+  paveh: '/svg/offensive/paveh.svg', arash2: '/svg/offensive/arash2.svg',
+  torM1: '/svg/defensive/torm1.svg', bavar373: '/svg/defensive/bavar373.svg',
+  s300pmu2: '/svg/defensive/s300pmu2.svg', phalanxCIWS: '/svg/defensive/phalanx.svg',
+  f14am: '/svg/defensive/f14am.svg', khordad15: '/svg/defensive/khordad15.svg',
+  pantsirS1: '/svg/defensive/pantsirs1.svg', ironDome: '/svg/defensive/irondome.svg',
+  thaad: '/svg/defensive/thaad.svg', ewJammer: '/svg/defensive/ewjammer.svg',
+};
+
 export default function Home() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const simRef = useRef<any>(null);
@@ -344,6 +358,11 @@ export default function Home() {
                   const sys = weapons[activeTab][key];
                   return (
                     <div key={key} className="weapon-card">
+                      {WEAPON_SVG[key] && (
+                        <div style={{background:'rgba(0,0,0,0.3)',borderRadius:'6px',padding:'6px',marginBottom:'6px',display:'flex',justifyContent:'center',alignItems:'center',minHeight:'48px'}}>
+                          <img src={WEAPON_SVG[key]} alt={sys.name} style={{maxWidth:'100%',maxHeight:'48px',objectFit:'contain',filter:'drop-shadow(0 0 4px rgba(0,255,100,0.3))'}} />
+                        </div>
+                      )}
                       <div className="weapon-card-header">
                         <span className="weapon-name">{sys.name}</span>
                         <span className="weapon-designation">{sys.designation}</span>

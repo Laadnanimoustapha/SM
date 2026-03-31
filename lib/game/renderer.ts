@@ -30,6 +30,40 @@ export class Renderer {
 
     // Impact markers for BDA
     this.bdaMarkers = [];
+
+    // ── SVG Weapon Images ──
+    this.svgImages = {};
+    const svgManifest = [
+      { names: ['Shahab-1'], type: 'ballistic_short', src: '/svg/offensive/shahab1.svg', vertical: true, scale: 4 },
+      { names: ['Shahab-3/Ghadr'], type: 'ballistic_medium', src: '/svg/offensive/shahab3.svg', vertical: true, scale: 4.5 },
+      { names: ['Emad'], type: 'ballistic_long', src: '/svg/offensive/emad.svg', vertical: true, scale: 5 },
+      { names: ['Khorramshahr-4'], type: 'ballistic_irbm', src: '/svg/offensive/khorramshahr.svg', vertical: true, scale: 5.5 },
+      { names: ['Fateh-110'], src: '/svg/offensive/fateh110.svg', vertical: true, scale: 3.5 },
+      { names: ['Sejjil-2'], type: 'solid_mrbm', src: '/svg/offensive/sejjil2.svg', vertical: true, scale: 5 },
+      { names: ['Fattah-1'], type: 'hypersonic', src: '/svg/offensive/fattah1.svg', vertical: false, scale: 5 },
+      { names: ['Soumar GLCM'], type: 'cruise', src: '/svg/offensive/soumar.svg', vertical: false, scale: 5 },
+      { names: ['Paveh ALCM'], type: 'alcm', src: '/svg/offensive/paveh.svg', vertical: false, scale: 4.5 },
+      { names: ['Shahed-136'], type: 'kamikaze_drone', src: '/svg/offensive/shahed136.svg', vertical: false, scale: 5 },
+      { names: ['Mohajer-6'], type: 'recon_drone', src: '/svg/offensive/mohajer6.svg', vertical: false, scale: 5 },
+      { names: ['Arash-2'], type: 'heavy_drone', src: '/svg/offensive/arash2.svg', vertical: false, scale: 5 },
+      { names: ['S-300PMU-2'], type: 'defense_long', src: '/svg/defensive/s300pmu2.svg', vertical: false, scale: 3 },
+      { names: ['Bavar-373'], src: '/svg/defensive/bavar373.svg', vertical: false, scale: 3 },
+      { names: ['Tor-M1'], type: 'defense_short', src: '/svg/defensive/torm1.svg', vertical: false, scale: 2.5 },
+      { names: ['Pantsir-S1'], type: 'defense_shorad', src: '/svg/defensive/pantsirs1.svg', vertical: false, scale: 2.5 },
+      { names: ['Iron Dome'], type: 'defense_cram', src: '/svg/defensive/irondome.svg', vertical: false, scale: 2.5 },
+      { names: ['Khordad-15'], src: '/svg/defensive/khordad15.svg', vertical: false, scale: 2.5 },
+      { names: ['THAAD'], type: 'defense_thaad', src: '/svg/defensive/thaad.svg', vertical: false, scale: 3 },
+      { names: ['Phalanx CIWS'], type: 'defense_ciws', src: '/svg/defensive/phalanx.svg', vertical: false, scale: 2 },
+      { names: ['F-14AM Tomcat'], type: 'defense_fighter', src: '/svg/defensive/f14am.svg', vertical: false, scale: 3 },
+      { names: ['EW Jammer'], type: 'defense_ew', src: '/svg/defensive/ewjammer.svg', vertical: false, scale: 2.5 },
+    ];
+    for (const entry of svgManifest) {
+      const img = new Image();
+      img.src = entry.src;
+      const meta = { img, vertical: entry.vertical, scale: entry.scale };
+      for (const n of entry.names) this.svgImages[n] = meta;
+      if (entry.type) this.svgImages['_t_' + entry.type] = meta;
+    }
   }
 
   generateMountains() {
@@ -135,6 +169,24 @@ export class Renderer {
     grad.addColorStop(1, 'rgba(0, 255, 80, 0)');
     ctx.fillStyle = grad;
     ctx.fillRect(0, this.scanLineY - 20, w, 40);
+  }
+
+  drawEntitySVG(entity, angle) {
+    const meta = this.svgImages[entity.name] || this.svgImages['_t_' + entity.type];
+    if (!meta || !meta.img.complete || !meta.img.naturalWidth) return false;
+    const ctx = this.ctx;
+    const img = meta.img;
+    const drawSize = entity.size * meta.scale;
+    const aspect = img.naturalWidth / img.naturalHeight;
+    let drawW, drawH;
+    if (aspect > 1) { drawW = drawSize; drawH = drawSize / aspect; }
+    else { drawH = drawSize; drawW = drawSize * aspect; }
+    ctx.save();
+    ctx.translate(entity.x, entity.y);
+    if (angle !== undefined) ctx.rotate(angle + (meta.vertical ? Math.PI / 2 : 0));
+    ctx.drawImage(img, -drawW / 2, -drawH / 2, drawW, drawH);
+    ctx.restore();
+    return true;
   }
 
   drawTerrain() {
@@ -327,6 +379,21 @@ export class Renderer {
     ctx.globalAlpha = 0.3;
     ctx.strokeRect(x - size * 0.65, y - size * 0.65, size * 1.3, size * 1.3);
     ctx.globalAlpha = 1;
+
+    // ── SVG rendering ──
+    if (this.drawEntitySVG(def, undefined)) {
+      ctx.shadowBlur = 0;
+      ctx.fillStyle = 'rgba(0, 255, 100, 0.3)';
+      ctx.font = '7px "JetBrains Mono", monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText(def.name, x, y + size + 16);
+      if (def.systemDesignation) {
+        ctx.fillStyle = 'rgba(0, 255, 100, 0.15)';
+        ctx.font = '6px "JetBrains Mono", monospace';
+        ctx.fillText(def.systemDesignation, x, y + size + 23);
+      }
+      return;
+    }
 
     switch (def.type) {
       case 'defense_long':
@@ -701,6 +768,37 @@ export class Renderer {
   drawThreatIcon(t) {
     const ctx = this.ctx;
     const { x, y, size } = t;
+
+    // ── SVG rendering ──
+    if (this.drawEntitySVG(t, t.angle)) {
+      // Add exhaust flame behind the SVG
+      if (t.type.startsWith('ballistic') || t.type === 'solid_mrbm' || t.type === 'hypersonic' || t.type === 'cruise' || t.type === 'alcm') {
+        const meta = this.svgImages[t.name] || this.svgImages['_t_' + t.type];
+        const rotOff = meta && meta.vertical ? Math.PI / 2 : 0;
+        const flameLen = t.flightPhase === 'boost' ? size * 1.5 : size * 0.5;
+        const fl = 0.7 + Math.random() * 0.3;
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(t.angle + rotOff);
+        const bx = -size * (meta ? meta.scale : 3) * 0.35;
+        ctx.fillStyle = `rgba(255, ${120 + Math.random() * 100}, 0, ${fl * 0.7})`;
+        ctx.beginPath();
+        ctx.moveTo(bx, -size * 0.15);
+        ctx.lineTo(bx - flameLen, 0);
+        ctx.lineTo(bx, size * 0.15);
+        ctx.closePath();
+        ctx.fill();
+        ctx.fillStyle = `rgba(255, 255, ${150 + Math.random() * 100}, ${fl * 0.5})`;
+        ctx.beginPath();
+        ctx.moveTo(bx, -size * 0.08);
+        ctx.lineTo(bx - flameLen * 0.5, 0);
+        ctx.lineTo(bx, size * 0.08);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+      }
+      return;
+    }
 
     switch (t.type) {
       case 'ballistic_short':
