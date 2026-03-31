@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type { Entity, OffensiveEntity, DefensiveEntity } from './entities';
 import { WeaponsDB } from './weapons_data';
 

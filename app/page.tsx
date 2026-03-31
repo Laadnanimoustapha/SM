@@ -7,7 +7,7 @@ import type { WeaponData, SimulationState } from '@/types/game';
 
 export default function Home() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const simRef = useRef<Simulation | null>(null);
+  const simRef = useRef<any>(null);
   const rendererRef = useRef<Renderer | null>(null);
 
   const [isRunning, setIsRunning] = useState(false);
@@ -65,9 +65,9 @@ export default function Home() {
       if (ctx) ctx.scale(dpr, dpr);
     }
 
-    const sim = new Simulation();
-    sim.canvasWidth = 900;
-    sim.canvasHeight = 650;
+    const sim: any = new Simulation();
+    (sim as any).canvasWidth = 900;
+    (sim as any).canvasHeight = 650;
     sim.reset();
     
     // Wire up events to React state

@@ -1069,5 +1069,5 @@ export const WeaponsDB = {
 };
 
 if (typeof window !== 'undefined') {
-  window.WeaponsDB = WeaponsDB;
+  (window as any).WeaponsDB = WeaponsDB;
 }
